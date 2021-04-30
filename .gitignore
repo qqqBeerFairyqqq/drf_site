@@ -24,9 +24,6 @@ __pycache__/
 *.py[cod]
 .pyc
 *.pyc
-*.js
-static/ckeditor/
-static/admin/js/
 
 !*media
 media/*
