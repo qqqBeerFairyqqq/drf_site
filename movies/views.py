@@ -1,9 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics
 from django.db import models
 from django.db.models import Q
 
-from .models import Movie
+from .models import Movie, Actor
 from . import serializers as sr
 from movies.services import get_client_ip
 
@@ -48,3 +49,13 @@ class AddStarRatingView(APIView):
 			return Response(status=201)
 		else:
 			return Response(status=400)
+
+
+class ActorListView(generics.ListAPIView):
+	queryset = Actor.objects.all()
+	serializer_class = sr.ActorListSerializer
+
+
+class ActorDetailView(generics.RetrieveAPIView):
+	queryset = Actor.objects.all()
+	serializer_class = sr.ActorDetailSerializer
