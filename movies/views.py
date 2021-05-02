@@ -4,13 +4,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Movie, Actor, Review
 from . import serializers as sr
-from .services import get_client_ip, MovieFilter
+from .services import get_client_ip, MovieFilter, PaginationMovies
 
 
 class MovieViewSet(viewsets.ReadOnlyModelViewSet):
 	'''output film list'''
 	filter_backends = (DjangoFilterBackend,)
 	filterset_class = MovieFilter
+	pagination_class = PaginationMovies
 
 	def get_queryset(self):
 		movies = Movie.objects.filter(draft=False).annotate(
